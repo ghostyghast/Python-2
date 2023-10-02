@@ -3,6 +3,9 @@ import matplotlib.pyplot as plt
 
 
 def check_num(num):
+    """check_num(string of a number with a M,K or B suffix) -> str
+    The function takes the num and removes the suffix and accordingly
+    mulitplies the value, then returns it as a string"""
     if 'K' in num:
         num = num.replace('K', '')
         num = float(num) * 1000
@@ -16,6 +19,8 @@ def check_num(num):
 
 
 def main():
+    """Program that plots two countries's information
+    one one same graph, along with a legend"""
     df = load('population_total.csv')
     country1 = df.loc['Belgium', :'2050']
     country2 = df.loc['France', :'2050']
