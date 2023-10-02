@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-def load(path: str) :
+def load(path: str):
     """load(str that represents path to csv file)
     function that loads csv file from given path and
     returns the dataframe object"""
