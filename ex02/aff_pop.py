@@ -1,17 +1,30 @@
-import pandas as pd
 from load_csv import load
 import matplotlib.pyplot as plt
 
 
+def check_num(num):
+    if 'K' in num:
+        num = num.replace('K', '')
+        num = float(num) * 1000
+    elif 'M' in num:
+        num = num.replace('M', '')
+        num = float(num) * 100000
+    elif 'B' in num:
+        num = num.replace('B', '')
+        num = float(num) * 1000000000
+    return str(int(num))
+
+
 def main():
     df = load('population_total.csv')
-    Belgium = df.loc['Belgium', :'2050']
-    france = df.loc['France', :'2050']
-    fra
-    print(france)
-    plt.plot(Belgium.index.astype(int), Belgium.values.astype(int))
-    plt.plot(france.index.astype(int), france.values.astype(int))
-    plt.yticks()
+    country1 = df.loc['Belgium', :'2050']
+    country2 = df.loc['France', :'2050']
+    country2 = country2.apply(check_num)
+    country1 = country1.apply(check_num)
+    plt.plot(country1.index.astype(int), country1.values.astype(int))
+    plt.plot(country2.index.astype(int), country2.values.astype(int))
+    ticks, values = plt.yticks()
+    plt.yticks(ticks, [f"{int(x / 100000)}M" for x in ticks])
     plt.xlabel('Year')
     plt.ylabel('Population')
     plt.title('Population Projections')
